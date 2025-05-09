@@ -18,7 +18,7 @@ Reviewing .NET, C#, OOP, and all related concepts
     - dependency inversion principle: suggests high-level modules should not depend on low-level modules, but both should depend on abstractions. abstractions should not depend on details, only details should depend on abstractions
 
 
---> patterns often implemented:
+--> C# COMMON PATTERNS:
     == Creational Design Patterns
     - singleton pattern:
         - used to ensure a class only has one instance
@@ -79,3 +79,18 @@ Reviewing .NET, C#, OOP, and all related concepts
 
 
 --> SPA:
+https://learn.microsoft.com/en-us/aspnet/core/client-side/spa/intro?view=aspnetcore-9.0
+https://github.com/dotnet/spa-templates
+
+    - single-page applications:
+        - web apps that load a single HTML page and dynamically update the page as the user
+        interacts with the app
+        - use AJAX and HTML to create fluid and responsive web apps without page reloads
+            - this means much of the work happens client side in JS
+            - AJAX calls return data -- not markup -- usually in JSON
+            - app uses JSON data to update page dynamically
+        - benefits:
+            - applications are more fluid and responsive
+            - sending app data as JSON requires separation between presentation (HTML markup) and app logic (AJAX reqs and JSON responses)
+                - separation makes it easier to design and evolve each layer
+                - can change HTML markup without touching code that implements app logic
