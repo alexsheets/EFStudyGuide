@@ -37,6 +37,20 @@ Reviewing .NET, C#, OOP, and all related concepts
         - creational pattern which provides a way to create objects without having to know the details of how they were constructed
         - useful to creat objects with complex dependencies or difficult to instantiate
 
+    == Structural Design Patterns
+    - adapter pattern:
+        - used to convert interface of class into another interface that clients expect
+        - implemented using a separate class which acts like a bridge btwn two incompatible interfaces
+        - pattern is useful when you want to use a class which is not compatible with existing codebase, and you want to convert interface to make it compatible
+    - decorator pattern:
+        - used to add functionality to an object dynamically
+        - implemented using a separate class which wraps the original object and provides additional functionality
+        - useful when you want to add functionality to an obj w/o changing interface
+    - bridge pattern: 
+        - used to decouple an abstraction from its implementation, allowing them to vary independently
+        - provides a way to create a family of related classes w/ different implementations
+        - useful when we have multiple variations of a class we want to use interchangeably
+
     - IOC
     - mediator pattern/CQRS: 
     - transient pattern:
