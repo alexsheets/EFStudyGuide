@@ -36,6 +36,7 @@ Reviewing .NET, C#, OOP, and all related concepts
     - dependency injection: IMPORTANT
         - creational pattern which provides a way to create objects without having to know the details of how they were constructed
         - useful to creat objects with complex dependencies or difficult to instantiate
+        - statically declare a class's required dependencies by defining them in constructor
 
     == Structural Design Patterns
     - adapter pattern:
@@ -51,10 +52,28 @@ Reviewing .NET, C#, OOP, and all related concepts
         - provides a way to create a family of related classes w/ different implementations
         - useful when we have multiple variations of a class we want to use interchangeably
 
-    - IOC
+    == Other patterns
+        - observer pattern:
+            - allows an object (subject) to notify a list of observers when state changes
+            - the observers are automatically noified and updated
+
     - mediator pattern/CQRS: 
+        - cqrs: command and query responsibility segregation. used to separate operations that read data from operations that write/update data
+        - pattern aims to reduce dependencies between objects by restricting direct communication and instead creating a way to collaborate only through the mediator object
+            - there is an object that encapsulates and manages how objects interact 
+
+    - scoped pattern:
+        - new instance of service is created per HTTP request
+        - each request gets its own service instance, but same instance is used throughout life of that request
+        - used to maintain some form of state across single request but need isolation btwn requests
+
     - transient pattern:
-    - repository pattern: 
+        - new instance of service is created every time its requested from container
+        - use when service is stateless and you want new instance every time to ensure no residual state is carried over between uses
+
+    - Inversion of Control: broader principal behind DI
+        - instead of an object controlling its own dependencies, a central container or factory does it
+        - concept of letting a framework call back into user code
 
 --> SDLC:
 
