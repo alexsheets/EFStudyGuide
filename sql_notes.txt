@@ -1,0 +1,6 @@
+CONCEPTS:
+
+--> cte 
+
+
+--> all kinds of joins
