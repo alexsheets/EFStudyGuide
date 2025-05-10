@@ -1,4 +1,13 @@
 CONCEPTS:
+==========================================================================================
+
+--> keys:
+    - primary key: unique identifier for each record in table. ensures no two rows have same value
+    in primary key columns and doesnt allow nulls
+    - foreign key: column or set of columns in a table that refers to the primary key of another.
+    establishes and enforces relationship between the two tables
+
+==========================================================================================
 
 --> cte
     - temporary result set that can be referenced with any common statement;
@@ -27,6 +36,25 @@ CONCEPTS:
         using their ID and then return a table which shows the employee id and name
         and supervisor name
 
+--> window functions:
+    - SQL functions which can perform calculations across a set of rows related to current row
+        - examples:
+            - ROW_NUMBER()
+            - RANK()
+            - NTILE()
+        - commonly used for analytical tasks like ranking or partitioning data
+
+--> view:
+    - virtual table created by SELECT query. does not store data itself, but presents data from
+    one or more tables in structured way.
+    - simplify complex queries and enhance security
+
+--> cursor
+    - db object used to retrieve, manipulate and traverse through rows in a result set
+    one row at a time. cursors are helpful when performing operations tht must be processed
+    sequentially
+
+==========================================================================================
 
 --> all kinds of joins
     - join: used to combine rows from two or more tables, based on related column
@@ -46,5 +74,66 @@ CONCEPTS:
     - full outer join: returns all records where there is match in either left or right
     --> SELECT columns FROM table1 FULL OUTER JOIN table2 ON table1.column = table2.column WHERE condition;
 
+    --> inner joins return only matching rows from both tables, OUTER join returns all rows
+    from at least one of the tables, including unmatched rows
 
---> stored procedures:
+==========================================================================================
+
+--> stored procedures/functions: 
+    - stored procedure: precompiled collection of SQL statements stored in database and can be
+    executed by calling its name.
+    - function: precompiled SQL statement which returns single value, used in queries
+    - advantages of stored procedures:
+        - improved performance
+        - enhanced security 
+        - reduced network traffic
+        - better code modularity
+
+==========================================================================================
+
+--> indexes:
+    - database object which improves speed of data retrieval operations on a table. allows SQL
+    queries to quickly locate rows based on indexed column values
+        - clustered index: determines physical order of rows in table
+        - nonclustered index: does not affect physical order of rows but improves query performance
+        by creating a separate data structure
+
+==========================================================================================
+
+--> backups, normalization, migrations, optimization etc:
+    
+    == backups
+    - SQL servers support several types of backups: full backups, differential backups, 
+    transaction log backups, and file/filegroup backups
+    - to restore a database in SQL, use RESTORE DATABASE command, specifying backup file
+    and options such as WITH REPLACE or WITH RECOVERY
+
+    == optimization/performance tuning
+    - performance tuning involves various tools/techs such as query optimization, index 
+    tuning, db design optimization, and server config tuning
+    - query optimization involves restructuring queries to improve performance; can be done
+    via using indexing, rewriting queries, avoiding unnecessary joins, etc.
+
+    == normalization
+    - process of organizing data in a rdb to reduce redundancy or dependency. improves data
+    integrity, reduces storage space, enhances query performance
+    - different norms:
+        - 1NF: first normal form
+        - 2NF: second normal form
+        - 3NF: third normal form
+        - BCNF: boyce codd normal form
+    - denormalization: combining normalized tables into larger tables for performance reasons.
+    used when complex queries and joins slow down data retrieval
+    
+    == migrations
+    - data migration can be performed using various methods like backup/restore, detach/attach,
+    import/export wizard, or sql server integration services
+    - SSIS is powerful ETL tool provided for building data integration and workflow solutions
+
+==========================================================================================
+
+--> different clauses:
+    - groupby: used to arrange identical data into groups. typically used with aggregate functions
+    like COUNT, SUM, or AVG to perform calculations on each groupby
+    - order by: sorts result set of query in either ascending or descending order based on one 
+    or more columns
