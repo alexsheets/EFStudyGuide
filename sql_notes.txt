@@ -1,6 +1,50 @@
 CONCEPTS:
 
---> cte 
+--> cte
+    - temporary result set that can be referenced with any common statement;
+        SELECT, INSERT, UPDATE or DELETE
+    - used to simplify complex queries into smaller, more manageable parts
+    - syntax:
+        WITH cte_name (column1, column2, ...) AS (
+            SELECT ...
+            FROM ...
+            WHERE ...
+        )
+        - cte_name: name of CTE, used to reference
+        - the column parameters are optional list of column names for CTE
+        - select, from and where are all just examples of the query that can be 
+        defined in the CTE
+    - example:
+        WITH Supervisors AS (
+            SELECT e.employee_id, e.employee_name, s.supervisor_name
+            FROM employees e
+            LEFT JOIN employees s ON e.supervisor_id = s.employee_id
+        )
+        SELECT employee_id, employee_name, supervisor_name
+        FROM Supervisors;
+        
+        - in the example we query employees table for the supervisor's name by
+        using their ID and then return a table which shows the employee id and name
+        and supervisor name
 
 
 --> all kinds of joins
+    - join: used to combine rows from two or more tables, based on related column
+    between them
+
+    - inner join: returns all records that have matching values in both tables
+    --> SELECT columns FROM table1 INNER JOIN table2 ON table1.column = table2.column;
+
+    - left outer join: returns all records from left table and matched records from 
+    right table
+    --> SELECT columns FROM table1 LEFT JOIN table2 ON table1.column = table2.column;
+
+    - right outer join: returns all records from right table and matched records from
+    left table
+    --> SELECT columns FROM table1 RIGHT JOIN table2 ON table1.column = table2.column;
+
+    - full outer join: returns all records where there is match in either left or right
+    --> SELECT columns FROM table1 FULL OUTER JOIN table2 ON table1.column = table2.column WHERE condition;
+
+
+--> stored procedures:
