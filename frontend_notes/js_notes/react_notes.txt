@@ -1,0 +1,295 @@
+REACT NOTES
+==============================================================================
+https://reactjs.net/tutorials/aspnetcore.html
+https://www.geeksforgeeks.org/reactjs-components/
+
+
+--> react is about using modular, composable components
+
+structure for a small example to follow:
+- commentBox
+	- commentList
+		- comment
+	- commentForm
+
+// simple skeleton divs for CommentList and CommentForm
+class CommentList extends React.Component {
+  render() {
+    return (
+      <div className="commentList">Hello, world! I am a CommentList.</div>
+    );
+  }
+}
+
+class CommentForm extends React.Component {
+  render() {
+    return (
+      <div className="commentList">Hello</div>
+    );
+  }
+}
+
+// commentbox which implements our other components.
+// we can see that components can be implemented using html tags
+class CommentBox extends React.Component {
+  render() {
+      return (
+            <div className="commentBox">
+                <h1>Comments</h1>
+                <CommentList />
+                <CommentForm />
+            </div>
+        );
+    }
+}
+// how to render a DOM element on the page
+ReactDOM.render(<CommentBox />, document.getElementById('content');
+
+
+--> using props:
+  - create comment component, which will depend on data passed in from
+  CommentList component. data passed in from CommentList component is
+  available as a property on our Comment component.
+  - these properties are accessed via this.props
+
+class Comment extends React.Component {
+  render() {
+    return (
+      <div className="comment">
+          <h2 className="commentAuthor">{this.props.author}</h2>
+          {this.props.children}
+      </div>
+    );
+  }
+}
+
+side note: by surrounding JS expressions with braces inside JSX, you can drop text or React
+components into the tree. we access named attrs passed to the component as keys on
+this.props and any nested elements as this.props.children
+
+--> component properties:
+    - now we have defined Comment component, we want to pass it author name and comment txt
+
+class CommentList extends React.Component {
+  render() {
+    return (
+        <div className="commentList">
+            <Comment author="Daniel Lo Nigro">
+                Hello ReactJS.NET World!
+            </Comment>
+            <Comment author="Pete Hunt">This is one comment</Comment>
+            <Comment author="Jordan Walke">
+                This is *another* comment
+            </Comment>
+        </div>
+    );
+  }
+}
+
+note: we passed data from parent CommentList component to child Comment components.
+example, we passed the author information via the author attribute. the comment component
+accesses properties through this.props.author and this.props.children
+
+
+
+--> hooking up a data model with our react components
+    - normally, we would retrieve data from our server (in our case, using ASP.NET mvc/entity     framework/dbcontext). in this case/example, we use a simple data arr:
+    
+const data = [
+    { id: 1, author: 'Daniel Lo Nigro', text: 'Hello ReactJS.NET World!' },
+    { id: 2, author: 'Pete Hunt', text: 'This is one comment' },
+    { id: 3, author: 'Jordan Walke', text: 'This is *another* comment' },
+];
+
+- we need to get the data into CommentList in a modular way; in this case, we'll modify CommentBox and the ReactDOM.render() call to pass the data into the CommentList via props:
+
+class CommentBox extends React.Component {
+  render() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+        <CommentList data={this.props.data} />
+        <CommentForm />
+      </div>
+    );
+  }
+}
+// changes to call for reactdom
+ReactDOM.render(<CommentBox data={data} />, document.getElementById('content'));
+
+// now the data is available in CommentList, render comments dynamically
+class CommentList extends React.Component {
+  render() {
+    const commentNodes = this.props.data.map(comment =>
+        (<Comment author={comment.author} key={comment.id}> {comment.text} </Comment>)
+    );
+    return (
+      <div className="commentList">{commentNodes}</div>;
+    );
+  }
+}
+
+
+--> WORKING WITH SERVER SIDE DATA
+// define a model
+namespace Demo.Models 
+{
+  public class CommentModel
+  {
+    public int Id { get; set; }
+    public string Author { get; set; }
+    public string Text { get; set; }
+  }
+}
+
+- note: in a real application, this is where we'd use the repository pattern, and retrieve our comments from a database
+
+// set up dbcontext
+public class CommentDbContext : DbContext {
+  public DbSet<Comment> Comments { get; set; }
+  
+  public void override onModelCreating();
+}
+
+// in controller
+CommentDbContext dbContext = new CommentDbContext();
+List<Comment> comments = dbContext.Comments.ToList();
+
+
+- in this case, we modify controller to have a hard-coded list of comments to retrieve
+public class HomeController : Controller
+{
+  // ilist inherits from ienumerable and icollection
+  private static readonly IList<CommentModel> _comments;
+
+  static HomeController()
+    {
+        _comments = new List<CommentModel>
+        {
+            new CommentModel
+            {
+                Id = 1,
+                Author = "Daniel Lo Nigro",
+                Text = "Hello ReactJS.NET World!"
+            },
+            new CommentModel
+            {
+                Id = 2,
+                Author = "Pete Hunt",
+                Text = "This is one comment"
+            },
+            new CommentModel
+            {
+                Id = 3,
+                Author = "Jordan Walke",
+                Text = "This is *another* comment"
+            },
+        };
+    }
+    
+  public ActionResult Index() 
+  {
+    return View();
+  }
+  
+  // add new controller action to return the list of comments
+  [Route("comments")]
+  public ActionResult Comments()
+  {
+    // return list of model
+    return Json(_comments);
+  }
+}
+
+- note: route attribute specifies that this action should be used when /comments is loaded
+    - this method of defining URL routes is known as attribute routing
+
+- now, we would change the fetch of the ReactDOM.render to replace hard-coded data with dynamic data
+from server. we can replace the data prop with. URL to fetch
+ReactDOM.render(<CommentBox url="/comments" />, document.getElementById('content'));
+
+normally, we would generate url server-side using Url.Action call and pass it down.
+
+
+
+--> reactive state
+    - so far, based on its props, each component renders itself only once. props are immutable; they    are passed from and owned by the parent. to implement interactions, we introduce mutable state 
+    to the component
+    - this.state is private to the component and can be changed by calling this.setState() and           passing an object that represents changes in state. when the state updates, the component re         renders itself 
+
+for our example: when server fetches data, we will be changing comment data we have. add an array of comment data to the CommentBox component as its state
+
+class CommentBox extends React.Component {
+  // constructor executes exactly once and sets up init state
+  // calling super extends class (ReactComponent) before using this
+  constructor(props) {
+    super(props);
+    this.state = { data: [] };
+  }
+
+  render() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+        <CommentList data={this.state.data} />
+        <CommentForm />
+      </div>
+    );
+  }
+}
+
+
+--> using a form
+    - our CommentForm component should ask the user for their name and comment text and send a 
+    request to the server to save the comment
+
+class CommentForm extends React.Component {
+  render () {
+    return (
+      <form className="commentForm">
+        <input type="text" placeholder="Your name" />
+        <input type="text" placeholder="Say something" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+}
+
+
+--> controlled components: with traditional DOM, input elements are rendered and browser manages state
+    - as a result, state of actual DOM will differ from that of component. this is not ideal
+    - we will be using this.state to save user's input as it is entered. we define initial state with     two properties, author and text and set them to be empty strings
+    
+class CommentForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { author: '', text: '' };
+    this.handleAuthorChange = this.handleAuthorChange.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+  }
+  handleAuthorChange(e) {
+    this.setState({ author: e.target.value });
+  }
+  handleTextChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  render () {
+    return (
+      <form className="commentForm">
+        <input
+                    type="text"
+                    placeholder="Your name"
+                    value={this.state.author}
+                    onChange={this.handleAuthorChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Say something..."
+                    value={this.state.text}
+                    onChange={this.handleTextChange}
+                />
+      </form>
+    );
+  }
+}
