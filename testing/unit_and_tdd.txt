@@ -29,6 +29,32 @@ UNIT TESTING:
         - accelerates development 
         - facilitates collaboration
 
+    - anatomy of a well-structured test:
+        - arrange: set up test env and instantiate system under test or its
+        dependencies
+        - act: invoke the target method using the prepared env
+        - assert: check if expected outcome equals actual result
+
+    - xunit attributs, conventions, execution:
+        - fact: attribute which indicates a method which is a test case. method
+        should have no return type or input params
+        - theory: attribute which signifies a data-driven test method, allows
+        multiple inputs, each of which results in separate test execution
+        - inlinedata: attribute which provides inline data for theory tests, 
+        simplifying data mgmt
+        - memberdata: allows sharing data across test methods by specifying a 
+        member from which to pull test data
+    
+    - moq: 
+        - powerful mocking library that provides simple and intuitive API 
+        for creating and managing mock objects
+        - key features:
+            - strong typing: leverages C# strong typing, providing compile-time
+            checking of mocked methods calls and behavior
+            - expressive API: moq API designed to be expressive and easy to use
+            - linq querying
+            - integration: works seamlesslyt with frameworks like xunit
+
 =========================================================================
 
 TEST DRIVEN DEVELOPMENT:
