@@ -1,0 +1,24 @@
+NOTES ON AZURE CLOUD SERVICES
+===========================================================================
+
+--> Azure App service
+    - hosts web applications, APIs, mobile backends
+    - ideal for deploying .NET core or .NET framework web apps because
+    it supports integration with VS and Azure DevOps for deployment
+    - features:
+        - scalability: auto-scaling based on demand
+        - managed platform: handles OS updates and load balancing
+        - supports multiple languages but optimized for .NET with 
+        built-in support for ASP.NET
+        - deployment slots for staging and production swaps
+    - ideal use case: deploying a .NET Core REST API or blazor web app with
+    minimal infrastructure management
+
+===========================================================================
+
+--> Azure Functions
+    - serverless compute for event-driven applications
+    - write serverless functions in C# for tasks like processing HTTP reqs or
+    handling azure queue messages, or automating workflows
+    - features:
+        

@@ -1,0 +1,76 @@
+AZURE DEVOPS SERVICES
+============================================================================
+
+--> OVERALL PURPOSE:
+    - end to end devops platform for planning/building/deploying applications
+    - provides tools for .NET project mgmt, CI/CD pipelines, and testing
+
+============================================================================
+
+--> key components
+    - repos: git-based source control 
+    - pipelines: CI/CD pipelines to build, test, deploy apps to azure app service,
+    kubernetes, or virtual machines/servers
+    - boards: agile project mgmt for tracking work
+    - test plans: tools for manual and automated testing
+    - artifacts: share packages/integrate package sharing into pipelines
+
+============================================================================
+
+--> devops services:
+
+    - azure monitor:
+        - monitors and diagnostics for apps and infrastructure
+        - integrates with .net apps via application insights to track performance
+        and errors
+        - features log analytics and alerts
+        - example: 
+            - monitoring a .NET api's performance and setting alerts for error rates
+    
+    - azure key vault:
+        - secure storage for secrets, keys and certificates
+        - simplifies secure config mgmt by allowing access via .NET SDKs
+        - integrates with azure active directory
+    
+    - azure kubernetes service:
+        - managed kubernetes for containerized applications
+        - supports deploying .net core apps in containers, with integration to 
+        azure devops for ci/CD
+        - simplifies cluster mgmt, auto-scales and self-heals
+        - can deploy microservice-based .NET core application with 
+        AKS for scalability
+    
+    - azure logic apps: 
+        - workflow automation for integrating apps with services
+        - can trigger .NET-based azure funcs or interact with .NET apps
+        via connectors like HTTP or SQL
+        - example:
+            - automate an approval workflow that triggers a .NET function
+            to update a db
+
+============================================================================
+
+--> CI/CD in azure:
+
+    - powerful tool for automating build, test and deployment processes
+    - streamline development workflow, ensure consistent delivery, and integrate
+    seamlessly with azure services and .NET projects
+
+    - pipelines: service in azure devops that defines and executes CI/CD workflows,
+    supporting .NET apps thru integration
+    - continuous integration: automatically build and test code every time a 
+    developer commits changes to a repo, ensuring early detection of issues
+    - continuous deployment: automatically deploy successful builds to target
+    environments after passing tests
+
+    - components:
+        - pipeline: usually a yaml file or can be done via azure to define ci/cd 
+        workflow, including build, test and deployment steps
+        - triggers: define when pipeline runs (on commit/pr/scheduled)
+        - jobs and steps: 
+            - job is collection of steps
+            - steps are individual tasks like restoring nuget pkgs 
+            or publishing artifacts
+        - agents: vms or containers that execute pipeline tasks
+        - artifacts: outputs of a pipeline stored for deployment 
+        - environments: logical targets for deployment
