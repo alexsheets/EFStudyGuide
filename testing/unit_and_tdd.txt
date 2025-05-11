@@ -1,0 +1,33 @@
+.NET Core Unit Testing Notes
+=========================================================================
+
+--> unit test: 
+    - exercises individual software components or methods, also known as a
+    unit of work
+    - should only test code within developers control
+        - dont test infrastructure concerns (interacting with db, file systems)
+
+--> integration tests:
+    - differs from unit test in that it exercises two or more software components
+    ability to function together, or their integration
+    - operate on broader spectrum and often include infrastructure concerns
+
+=========================================================================
+
+UNIT TESTING:
+    
+    - most commonly used testing frameworks are xUnit, NUnit, MSUnit
+
+
+
+=========================================================================
+
+TEST DRIVEN DEVELOPMENT:
+    
+    - powerful approach to building robust software
+    - used to write tests BEFORE we start implementation
+        - before starting, list reqs need to be fulfilled in application
+
+    - take first requirement, write failing test -- the test should describe
+    what we should do, so we need to write necessary code to make test pass
+    

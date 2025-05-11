@@ -55,4 +55,4 @@ JAVASCRIPT BASICS NOTES:
 --> arrow functions (the basics)
     - let func = (arg1, arg2, argN) => expression;
     - creates function that accepts arguments and evaluates the expression on the right side with their use and returns its result
-    - if there are no arguments, we must still past empty parentheses
+    - if there are no arguments, we must still pass empty parentheses
