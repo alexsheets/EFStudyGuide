@@ -1,3 +1,0 @@
---> using react with aspnet core
-    - https://reactjs.net/getting-started/aspnetcore.html
-    - https://reactjs.net/tutorials/aspnetcore.html
