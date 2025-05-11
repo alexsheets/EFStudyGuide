@@ -1,18 +1,24 @@
 Reviewing .NET, C#, OOP, and all related concepts
-========================================================================
+=====================================================================================================================================
 
 --> SOLID principles:
     - single responsibility principle: each class should be responsible for one part/functionality of the system
 
-    - open closed principle: a class should be open for extension but closed for modification; good for adding new features without altering existing code
+    - open closed principle: a class should be open for extension but closed for modification; good for adding new features without 
+    altering existing code
 
-    - liskov substitution principle: objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program; in other words, you should be able to use any subclass where you use its parent class
-        - a derived class should not break base class type definition and behavior, which means objects of base class shall be replaceable with objects of its derived classes without breaking application
+    - liskov substitution principle: objects of a superclass should be replaceable with objects of a subclass without affecting the
+    correctness of the program; in other words, you should be able to use any subclass where you use its parent class
+        - a derived class should not break base class type definition and behavior, which means objects of base class shall be 
+        replaceable with objects of its derived classes without breaking application
 
-    - interface segregation principle: a class should not be forced to implement interface it doesn't use; principle encourages creation of small, client-specific interfaces
+    - interface segregation principle: a class should not be forced to implement interface it doesn't use; principle encourages 
+    creation of small, client-specific interfaces
 
-    - dependency inversion principle: suggests high-level modules should not depend on low-level modules, but both should depend on abstractions. abstractions should not depend on details, only details should depend on abstractions
+    - dependency inversion principle: suggests high-level modules should not depend on low-level modules, but both should depend on 
+    abstractions. abstractions should not depend on details, only details should depend on abstractions
 
+=====================================================================================================================================
 
 --> C# COMMON PATTERNS:
     == Creational Design Patterns
@@ -38,7 +44,8 @@ Reviewing .NET, C#, OOP, and all related concepts
     - adapter pattern:
         - used to convert interface of class into another interface that clients expect
         - implemented using a separate class which acts like a bridge btwn two incompatible interfaces
-        - pattern is useful when you want to use a class which is not compatible with existing codebase, and you want to convert interface to make it compatible
+        - pattern is useful when you want to use a class which is not compatible with existing codebase, and you want to convert interface 
+        to make it compatible
     - decorator pattern:
         - used to add functionality to an object dynamically
         - implemented using a separate class which wraps the original object and provides additional functionality
@@ -55,7 +62,8 @@ Reviewing .NET, C#, OOP, and all related concepts
 
     - mediator pattern/CQRS: 
         - cqrs: command and query responsibility segregation. used to separate operations that read data from operations that write/update data
-        - pattern aims to reduce dependencies between objects by restricting direct communication and instead creating a way to collaborate only through the mediator object
+        - pattern aims to reduce dependencies between objects by restricting direct communication and instead creating a way to collaborate 
+        only through the mediator object
             - there is an object that encapsulates and manages how objects interact 
 
     - scoped pattern:
@@ -71,12 +79,14 @@ Reviewing .NET, C#, OOP, and all related concepts
         - instead of an object controlling its own dependencies, a central container or factory does it
         - concept of letting a framework call back into user code
 
+=====================================================================================================================================
+
 --> SDLC:
 
 
+=====================================================================================================================================
+
 --> SPA:
-https://learn.microsoft.com/en-us/aspnet/core/client-side/spa/intro?view=aspnetcore-9.0
-https://github.com/dotnet/spa-templates
 
     - single-page applications:
         - web apps that load a single HTML page and dynamically update the page as the user
@@ -97,5 +107,45 @@ https://github.com/dotnet/spa-templates
         - communication: frontend communicates with backend via HTTP reqs using something like fetch or HttpClient to retrieve and send data in JSON
         - hosting: SPA frontend can be hosted alongside ASP.NET Core backend (ie served as static files) or deployed separately
 
-    - frontend options for SPAs in .NET
-    
+
+    - frontend options for SPAs in .NET:
+
+        - blazor webassembly
+            - SPA runs entirely in browser using WbAssembly
+            - .NET runtime is downloaded to browser, allowing code to execute client-side
+            - SPA communicates with asp.net backend via APIs
+            - initial page load includes blazor app and subsequent interactions are handled client-side
+            - key features:
+                - write UI components in C# using razor syntax
+                - client-side routing with navigationmanager
+                - state management via dependency injection
+                - debugging c# directly in browser
+            - integration with asp.net core:
+                - host blazor app as static files in asp.net core project (wwwroot)
+                - secure APIs with JWT auth
+
+            - component lifestyle
+        
+        - react
+            - popular JS library for building SPAs
+            - manages SPAs UI as tree of reusable components, using virtual DOM for efficient updates
+            - SPA is built with JS or TS and runs entirely in browser
+            - client-side routing handled by libraries like react-router
+            - ASP.NET core backend serves APIs
+            - tools like create react app or vite are used to scaffold react frontend
+            - key features:
+                - component-based architecture
+                - rich ecosystem for state mgmt
+                - server-side rendering or static site generation
+            - integration:
+                - ASP.NET core serves react SPA as static files and proxies API requests to controllers
+                - use fetch or axios libraries to call ASP.net core apis
+                - secure apis with JWT or OAuth
+            
+            - component based architecture, state management, routing
+
+    - common SPA topics:
+        - client-side vs server-side rendering
+        - handling authentication/authorization 
+        - optimizing performance (lazy loading, code splitting)
+        - state management
