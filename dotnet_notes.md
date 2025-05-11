@@ -1,10 +1,6 @@
 Reviewing .NET, C#, OOP, and all related concepts
 ========================================================================
 
---> unit/integration testing:
-
-
-
 --> SOLID principles:
     - single responsibility principle: each class should be responsible for one part/functionality of the system
 
@@ -94,3 +90,12 @@ https://github.com/dotnet/spa-templates
             - sending app data as JSON requires separation between presentation (HTML markup) and app logic (AJAX reqs and JSON responses)
                 - separation makes it easier to design and evolve each layer
                 - can change HTML markup without touching code that implements app logic
+
+    - .NET-based SPA:
+        - backend: asp.net core typically serves as API layer providing RESTful endpoints to handle data requests, auth and business logic
+        - frontend: JS-based framework (react, vue) or .NET-based framework (like blazor) manages client-side UI, routing, and state
+        - communication: frontend communicates with backend via HTTP reqs using something like fetch or HttpClient to retrieve and send data in JSON
+        - hosting: SPA frontend can be hosted alongside ASP.NET Core backend (ie served as static files) or deployed separately
+
+    - frontend options for SPAs in .NET
+    
