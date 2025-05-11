@@ -16,9 +16,18 @@
 
 UNIT TESTING:
     
-    - most commonly used testing frameworks are xUnit, NUnit, MSUnit
-
-
+    - most commonly used testing frameworks are xUnit, NUnit, MSUnit, Moq
+        - xunit: focuses on simplicity and ease of use
+        - nunit: rich feature set and extensive plugin ecosystem
+        - mstest: default testing framework provided by VS
+        - moq: mocking library specifically for .NET, allowing to create
+        mock objects for isolated testing 
+    - automated, self-contained and focused on specific aspects of a unit
+    - advantages:
+        - ensures functionality
+        - enhances maintainability
+        - accelerates development 
+        - facilitates collaboration
 
 =========================================================================
 
@@ -30,4 +39,13 @@ TEST DRIVEN DEVELOPMENT:
 
     - take first requirement, write failing test -- the test should describe
     what we should do, so we need to write necessary code to make test pass
-    
+    - after done with first requirement completely, you can continue with next
+    requirement. meaning you iterate entire cycle (red -> green -> refactor)
+
+    - advantages:
+        - makes you think about needed API in beginning; such as classes, properties
+        and APIs needed
+        - makes you think about what code should do rather than how it should be done
+        - get quick feedback about requirements by running tests
+        - helps to create modular code
+        - leads to maintainable codebase
