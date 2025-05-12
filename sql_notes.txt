@@ -66,6 +66,7 @@ CONCEPTS:
 ==========================================================================================
 
 --> all kinds of joins
+
     - join: used to combine rows from two or more tables, based on related column
     between them
 
@@ -89,6 +90,7 @@ CONCEPTS:
 ==========================================================================================
 
 --> stored procedures/functions: 
+
     - stored procedure: precompiled collection of SQL statements stored in database and can be
     executed by calling its name.
     - function: precompiled SQL statement which returns single value, used in queries
@@ -151,10 +153,24 @@ CONCEPTS:
 ==========================================================================================
 
 --> different clauses:
+
     - groupby: used to arrange identical data into groups. typically used with aggregate functions
     like COUNT, SUM, or AVG to perform calculations on each groupby
+
     - order by: sorts result set of query in either ascending or descending order based on one 
     or more columns
+
+    - having: filters data after groupby clause has grouped it. filters rows based on a specific
+    condition and is typically used with agg functions
+
+    - where: filters rows from a table based on specified conditions before data retrieved
+
+    - top: retrieves a specified number of rows from result set
+    
+    - with: also known as CTE; creates temporary result set, can be referenced with SQL query 
+    to simplify complex queries
+
+    - like: used w/ wilcard characters for pattern matching
 
 ==========================================================================================
 
