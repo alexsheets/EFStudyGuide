@@ -2,14 +2,23 @@ CONCEPTS:
 ==========================================================================================
 
 --> keys:
+
     - primary key: unique identifier for each record in table. ensures no two rows have same value
-    in primary key columns and doesnt allow nulls
+    in primary key columns 
+        - DOES NOT HAVE nulls
+        - can create joint PK, but can only have ONE pk in table
+
+    - unique key: 
+        - can have nulls
+        - can have one or many unique keys in a table
+
     - foreign key: column or set of columns in a table that refers to the primary key of another.
     establishes and enforces relationship between the two tables
 
 ==========================================================================================
 
---> cte
+--> cte: common table expression
+
     - temporary result set that can be referenced with any common statement;
         SELECT, INSERT, UPDATE or DELETE
     - used to simplify complex queries into smaller, more manageable parts
@@ -92,6 +101,8 @@ CONCEPTS:
 ==========================================================================================
 
 --> indexes:
+
+    - INCREASE search performance
     - database object which improves speed of data retrieval operations on a table. allows SQL
     queries to quickly locate rows based on indexed column values
         - clustered index: determines physical order of rows in table
@@ -119,8 +130,15 @@ CONCEPTS:
     integrity, reduces storage space, enhances query performance
     - different norms:
         - 1NF: first normal form
+            - columns have atomic values; no repreating groups
         - 2NF: second normal form
+            - eliminate partial dependencies
+            - requires table to be in 1NF and ensures all non-key attrs are fully dependent on 
+            primary key
         - 3NF: third normal form
+            - eliminate transitive dependencies
+            - requires table to be in 2NF and ensures again that all non-key attrs are directly
+            dependent on the primary key and not any other non-key attribute
         - BCNF: boyce codd normal form
     - denormalization: combining normalized tables into larger tables for performance reasons.
     used when complex queries and joins slow down data retrieval
@@ -137,3 +155,13 @@ CONCEPTS:
     like COUNT, SUM, or AVG to perform calculations on each groupby
     - order by: sorts result set of query in either ascending or descending order based on one 
     or more columns
+
+==========================================================================================
+
+--> other questions/concepts:
+
+1. difference between char and varchar and nchar?
+    - char only takes a fixed length; say in char(3), can take US or IND and it is valid
+    - varchar can vary. say we define varchar(10), if length is shorter, we only take that length
+        - variable length
+    - nchar can also store non-english/unicode 
