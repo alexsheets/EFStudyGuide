@@ -1,0 +1,79 @@
+BLAZOR NOTES (ALSO WITH SPA)
+=========================================================================
+
+--> what is blazor?
+
+    - modern web framework within .NET eco which enables devs to build
+    interactive, client-side or server-side webapps using C#
+    - leverages WebAssembly for client-side or SignalR for server-side
+    - used to create web UIs using C#, HTML, class
+    - key features:
+        - component model: reusable UI components encapsulate logic and markup
+        - execution: write both client and server logic in C#
+        - interopability with JS
+        - integration seamless with ASP.NET, EF and otherlibraries
+    
+    - comes in two hosting models:
+        - webassembly: runs client-side in browser, the .NET runtime and 
+        app code are downloaded to client, enabling offline and SPA
+        - blazor server: runs server-side with UI updates sent to client
+        over a signalr connection
+    
+    - typically structured with:
+        - razor components: .razor files combine C# and html markup
+        - dependency injection: services injected into components
+        - routing: blazor supports client-side or server-side routing 
+        - state mgmt: tools allow custom containers to manage app state
+    
+=========================================================================
+
+--> blazor in single page applications
+
+    - particularly well-suited for building SPAs especially with blazor 
+    webassembly hosting model
+    - characteristics of blazor SPA:
+        - client-side execution: wasm runs entirely in browser
+        - routing: blazor provides client-side router <Router> that handles
+        navigation without full page reloads
+        - state mgmt: SPA maintain state in memory. blazor injection scopes
+        (singleton, scoped, transient) simplify state mgmt
+        - api integration: blazor SPAs fetch data from REST APIs/endpoints
+        using HttpClient often secured with JWT or OAuth
+        - offline support
+    
+    - how blazor SPAs are built:
+        - project setup: blazor wasm project is created using .NET CLI or 
+        VS templates. inlcudes default SPA structure with routing, components
+        and a wwwroot folder for static assets
+        - component development: devs create reusable .razor components for 
+        UI elements. components use data binding, event handling, and lifecycle
+        methods (OnInitializedAsync, OnParametersSetAsync)
+        - routing: app.razor file defines router, mapping URLs to components
+        - data fetching: components fetch data from APIs using HttpClient
+        - state and nav: navigation handled via NavigationManager and state is
+        managed through services or component params
+        - deployment: blazor wasm SPAs are deployed as static files to CDNs, 
+        Azure Static Web Apps, or IIS, with ASP.NET Core APIs hosted separately
+
+=========================================================================
+
+--> lazy loading in blazor
+
+    - defer loading specific assemblies (DLLs, code, resources, etc) until they
+    are needed, rather than loading everything when app starts
+        - particularly useful for SPAs where entire .NET runtime and app code
+        are downloaded to browser
+    - how it helps:
+        - reduced initial load time
+        - improved user exp
+        - efficient resource usage
+        - scalability for large apps
+    
+    - implementation:
+        - organize assemblies by splitting blazor app into multiple projects
+        or assemblies and reference them in main project, but mark them as 
+        lazy-loaded
+        - configure lazy loading by editing blazor.boot.json in wwwroot folder
+        - load assemblies dynamically by using LazyAssemblyLoader service to 
+        load them at runtime. inject ILazyAssemblyLoader into component or service
+        and call LoadAssembliesAsync
